@@ -9,7 +9,8 @@ export default class App extends Component {
 
     this.state = {
       candidates: [],
-      previousVotes: []
+      previousVotes: [],
+      previousPercentage: []
     }
     this.interval = null
   }
@@ -24,17 +25,21 @@ export default class App extends Component {
           const previousVotes = this.state.candidates.map(({ id, votes }) => {
             return { id, votes }
           })
+          const previousPercentage = this.state.candidates.map(({ id, percentage }) => {
+            return { id, percentage }
+          })
 
           this.setState({
             candidates: json.candidates,
-            previousVotes
+            previousVotes,
+            previousPercentage
           })
         })
     }, 1000)
   }
 
   render () {
-    const { candidates, previousVotes } = this.state
+    const { candidates, previousVotes, previousPercentage } = this.state
 
     if (candidates.length === 0) {
       return <Spinner description='Carregando...' />
@@ -43,7 +48,12 @@ export default class App extends Component {
     return (
       <div className='container'>
         <Header>Votacão</Header>
-        <Candidates previousVotes={previousVotes} candidates={candidates} />
+        <Candidates
+          previousPercentage={previousPercentage}
+          previousVotes={previousVotes}
+          candidates={candidates}
+
+        />
       </div>
     )
   }
