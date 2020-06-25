@@ -9,7 +9,7 @@ import Popularity from './Popularity'
 import css from './candidate.module.css'
 import { formatNumber, formatPercentage } from '../helpers/formatHelper'
 
-export default function Candidate ({ candidate, position }) {
+export default function Candidate ({ previousVote, candidate, position }) {
   const {
     id,
     name,
@@ -26,7 +26,8 @@ export default function Candidate ({ candidate, position }) {
       <Picture description={name} imageSource={imageSource} />
       <Info>
         <Name>{name}</Name>
-        <Votes>{formatNumber(votes)}</Votes>
+        {/* <Votes>{formatNumber(votes)}</Votes> */}
+        <Votes value={votes} previous={previousVote} />
         <Percentage>{formatPercentage(percentage)}</Percentage>
         <Popularity value={popularity} />
       </Info>
